@@ -4,7 +4,23 @@ def call(String dockerHubUsername, String imageName) {
      // Tag the Docker image
     sh "docker tag ${imageName} ${dockerHubUsername}/${imageName}:latest"
     // Push the Docker image
-    withDockerRegistry([url: 'https://index.docker.io/v1/', credentialsId: 'Docker']) {
-        sh "docker push ${dockerHubUsername}/${imageName}:latest"
-    }
+
+    withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'pass', usernameVariable: 'user')]) {
+     sh "docker login -u '$USER' -p '$PASS'"
+      sh "docker push ${dockerHubUsername}/${imageName}:latest"
 }
+}
+
+
+
+def call(String project, String ImageTag, String hubUser){
+//     withCredentials([usernamePassword(
+//             credentialsId: "docker",
+//             usernameVariable: "USER",
+//             passwordVariable: "PASS"
+//     )]) {
+//         sh "docker login -u '$USER' -p '$PASS'"
+//     }
+//     sh "docker image push ${hubUser}/${project}:${ImageTag}"
+//     sh "docker image push ${hubUser}/${project}:latest"   
+// }
