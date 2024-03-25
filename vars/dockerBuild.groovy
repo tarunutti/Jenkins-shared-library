@@ -9,11 +9,12 @@ def call(String dockerHubUsername, String imageName) {
      sh "docker login -u '$USER' -p '$PASS'"
       sh "docker push ${dockerHubUsername}/${imageName}:latest"
 }
+
 }
 
 
 
-def call(String project, String ImageTag, String hubUser){
+//def call(String project, String ImageTag, String hubUser){
 //     withCredentials([usernamePassword(
 //             credentialsId: "docker",
 //             usernameVariable: "USER",
