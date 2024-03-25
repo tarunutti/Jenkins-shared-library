@@ -4,9 +4,12 @@ def call(String dockerHubUsername, String imageName) {
      // Tag the Docker image
     sh "docker tag ${imageName} ${dockerHubUsername}/${imageName}:latest"
     // Push the Docker image
-   withDockerRegistry(credentialsId: 'Docker', toolName: 'Docker', url: 'https://hub.docker.com/') {
-     sh "docker push ${dockerHubUsername}/${imageName}:latest"
+    withDockerRegistry(credentialsId: 'Docker', toolName: 'Docker') {
+         sh "docker push ${dockerHubUsername}/${imageName}:latest"
+   
     
- }
+}
+
 
 }
+ 
