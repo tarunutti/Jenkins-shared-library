@@ -54,7 +54,7 @@ pipeline{
         stage('Trivy file scan'){
         when { expression { params.action == 'create'}}    
             steps{
-                trivyFs()
+                trivyFS()
             }
         }
         stage('OWASP FS SCAN') {
